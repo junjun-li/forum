@@ -2,7 +2,7 @@
   <div class="fly-header layui-bg-black">
     <div class="layui-container">
       <a class="fly-logo" href="/">
-        <img src="../assets/logo-2.png" alt="layui" />
+        <img src="@/assets/logo-2.png" alt="layui" />
       </a>
       <ul class="layui-nav fly-nav layui-hide-xs">
         <li class="layui-nav-item layui-this">
@@ -25,13 +25,13 @@
       <ul class="layui-nav fly-nav-user">
         <!-- 未登入的状态 -->
         <li class="layui-nav-item">
-          <a class="iconfont icon-touxiang layui-hide-xs" href="../user/login.html"></a>
+          <a class="iconfont icon-touxiang layui-hide-xs" href="@/user/login.html"></a>
         </li>
         <li class="layui-nav-item">
-          <a href="../user/login.html">登入</a>
+          <a href="@/user/login.html">登入</a>
         </li>
         <li class="layui-nav-item">
-          <a href="../user/reg.html">注册</a>
+          <a href="@/user/reg.html">注册</a>
         </li>
         <li class="layui-nav-item layui-hide-xs">
           <a
