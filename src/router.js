@@ -1,15 +1,31 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Login = () => import(/* webpackChunkName: 'login' */ '@/views/Login.vue')
-const Reg = () => import(/* webpackChunkName: 'reg' */ '@/views/Reg.vue')
-const Forget = () =>
-  import(/* webpackChunkName: 'forget' */ '@/views/Forget.vue')
+const Login = () => import( /* webpackChunkName: 'login' */ '@/views/Login.vue')
+const Reg = () => import( /* webpackChunkName: 'reg' */ '@/views/Reg.vue')
+const Forget = () => import( /* webpackChunkName: 'forget' */ '@/views/Forget.vue')
+const Index = () => import( /* webpackChunkName: 'index' */ '@/views/channels/Index.vue')
+const Home = () => import( /* webpackChunkName: 'home' */ '@/views/channels/Home.vue')
+const Template1 = () => import( /* webpackChunkName: 'template1' */ '@/views/channels/Template1.vue')
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
+  routes: [{
+      path: '/',
+      component: Home,
+      children: [{
+          path: 'index',
+          name: 'index',
+          component: Index
+        },
+        {
+          path: '/index/:catalog',
+          name: 'catalog',
+          component: Template1
+        }
+      ]
+    },
     {
       path: '/login',
       name: 'login',
@@ -21,7 +37,7 @@ export default new Router({
       component: Reg,
       // login页面才能拿到sid 防止没有sid
       beforeEnter: (to, from, next) => {
-        if(from.name === 'login') {
+        if (from.name === 'login') {
           next()
         } else {
           next('/login')
