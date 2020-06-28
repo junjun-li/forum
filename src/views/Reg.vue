@@ -144,7 +144,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import { reg, getCode } from '@/api/login'
+import { reg, getCode } from '@/api/index'
 import { mapState } from 'vuex'
 export default {
   name: 'reg',

@@ -31,7 +31,7 @@
                                v-model="username"
                                placeholder="请输入邮箱"
                                autocomplete="off"
-                               class="layui-input"/>
+                               class="layui-input" />
                       </div>
                     </div>
                     <div class="error-box">
@@ -50,7 +50,7 @@
                                v-model="password"
                                placeholder="请输入密码"
                                autocomplete="off"
-                               class="layui-input"/>
+                               class="layui-input" />
                       </div>
                     </div>
                     <div class="error-box">
@@ -70,7 +70,7 @@
                                  v-model="code"
                                  placeholder="请输入验证码"
                                  autocomplete="off"
-                                 class="layui-input"/>
+                                 class="layui-input" />
                         </div>
                         <div>
                           <span class="svg"
@@ -114,9 +114,9 @@
 </template>
 
 <script>
-import {getCode, login} from '@/api/login'
-import {ValidationObserver, ValidationProvider} from 'vee-validate'
-import {v4 as uuid} from 'uuid'
+import { getCode, login } from '@/api/index'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { v4 as uuid } from 'uuid'
 
 export default {
   name: 'login',
