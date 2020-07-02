@@ -16,6 +16,7 @@ module.exports = {
     //   warnings: true,
     //   errors: true
     // }
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: 'http://localhost:3000'
   }
 }

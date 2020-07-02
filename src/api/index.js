@@ -44,8 +44,8 @@ export const login = data => axios.post('/login', data)
 //       status: data.status
 //     }
 //   })
-export const getArticleList = data =>
-  axios.get(`/getArticleList?${qs.stringify(data)}`)
+export const getPostList = data =>
+  axios.get(`/getPostList?${qs.stringify(data)}`)
 
 // 获取温馨提醒
 export const getTips = () => axios.get(`/getTips`)

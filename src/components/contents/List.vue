@@ -21,8 +21,7 @@
            @click.prevent="search('4')">按热议</a>
       </span>
     </div>
-
-    <list-item></list-item>
+    <list-item :list="postList"></list-item>
     <div style="text-align: center">
       <div class="laypage-main">
         <a class="laypage-next">更多求解</a>
@@ -33,7 +32,7 @@
 
 <script>
 import ListItem from './ListItem'
-import { getArticleList } from '@/api/index'
+import { getPostList } from '@/api/index'
 export default {
   name: 'list',
   components: {
@@ -43,12 +42,17 @@ export default {
     return {
       status: '',
       tag: '',
-      sort: ''
+      sort: '',
+      page: 0,
+      limit: 20,
+      postList: []
     }
   },
-  created() {},
+  created() {
+    this._getPostList()
+  },
   methods: {
-    async _getArticleList() {
+    async _getPostList() {
       let data = {
         page: this.page,
         limit: this.limit,
@@ -56,7 +60,9 @@ export default {
         sort: this.sort,
         status: this.status
       }
-      let res = await getArticleList(data)
+      let res = await getPostList(data)
+      console.log(res)
+      this.postList = res.data
     },
     search(val) {
       switch (val) {
@@ -64,11 +70,13 @@ export default {
         case '0':
           this.status = '0'
           this.tag = ''
+          this._getPostList()
           break
         // 已结贴
         case '1':
           this.status = '1'
           this.tag = ''
+          this._getPostList()
           break
         // 查询"精华"标签
         case '2':
@@ -87,6 +95,8 @@ export default {
         default:
           this.status = ''
           this.tag = ''
+          this._getPostList()
+
       }
     }
   }
