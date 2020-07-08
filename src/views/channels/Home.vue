@@ -1,4 +1,3 @@
-
 <template>
   <div class="home">
     <imooc-panel></imooc-panel>
@@ -17,5 +16,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 </style>

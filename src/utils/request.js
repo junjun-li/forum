@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { baseURL } from '@/config/index'
+
 let CancelToken = axios.CancelToken
 class HttpRequest {
-  constructor(baseURL) {
+  constructor (baseURL) {
     this.baseURL = baseURL
     this.pending = {}
   }
   // 设置axios的基本配置
-  getInsideConfig() {
+  getInsideConfig () {
     const config = {
       baseURL: this.baseURL,
       headers: {
@@ -18,14 +19,14 @@ class HttpRequest {
     return config
   }
   // 如果重复请求,删除掉重复的请求
-  removePending(key, isRequest = false) {
+  removePending (key, isRequest = false) {
     if (this.pending[key] && isRequest) {
       this.pending[key]('重复请求')
     }
     delete this.pending[key]
   }
   // 给实例添加拦截器
-  interceptors(instance) {
+  interceptors (instance) {
     // // 添加请求拦截器
     instance.interceptors.request.use(
       config => {
@@ -64,7 +65,7 @@ class HttpRequest {
   }
 
   // 创建axios实例
-  request(options) {
+  request (options) {
     let instance = axios.create()
     // 混合options
     let newOptions = Object.assign(this.getInsideConfig(), options)
@@ -72,7 +73,7 @@ class HttpRequest {
     this.interceptors(instance)
     return instance(newOptions)
   }
-  get(url, config) {
+  get (url, config) {
     let options = Object.assign(
       {
         method: 'get',
@@ -82,7 +83,7 @@ class HttpRequest {
     )
     return this.request(options)
   }
-  post(url, data) {
+  post (url, data) {
     return this.request({
       method: 'post',
       url,

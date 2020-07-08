@@ -37,12 +37,14 @@
           <i class="layui-icon"></i>
         </span>
         <a href="jie/add.html"
-           class="layui-btn">发表新帖</a>
+           class="layui-btn">发表新帖
+        </a>
       </div>
       <div class="layui-hide-sm layui-show-xs-block"
            style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
         <a href="jie/add.html"
-           class="layui-btn">发表新帖</a>
+           class="layui-btn">发表新帖
+        </a>
       </div>
     </div>
   </div>
@@ -50,9 +52,10 @@
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
   name: 'panel',
-  data() {
+  data () {
     return {
       lists: [
         {
@@ -90,9 +93,16 @@ export default {
   },
   computed: {
     ...mapState(['isLogin'])
+  },
+  methods: {
+    getList () {
+
+    }
+
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 </style>

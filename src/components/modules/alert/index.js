@@ -18,7 +18,7 @@ Alert.install = (Vue) => {
     instance.isShow = true
     instance.type = 'alert'
   }
-  Vue.prototype.$confirm = (msg,sucess,cancel) => {
+  Vue.prototype.$confirm = (msg, sucess, cancel) => {
     // 逻辑...
     instance.msg = msg
     instance.isShow = true

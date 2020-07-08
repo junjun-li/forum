@@ -8,7 +8,7 @@
       <div class="layui-col-md4">
         <tips></tips>
         <sign></sign>
-        <hotlist></hotlist>
+        <hot-list></hot-list>
         <ads></ads>
         <links></links>
       </div>
@@ -24,19 +24,21 @@ import Ads from '@/components/sidebar/Ads'
 import Links from '@/components/sidebar/Links'
 import List from '@/components/contents/List'
 import Top from '@/components/contents/Top'
+
 export default {
   name: 'index',
   components: {
-    'tips': Tips,
-    'sign': Sign,
-    'hotlist': HotList,
-    'ads': Ads,
-    'links': Links,
-    'list': List,
-    'top': Top
+    tips: Tips,
+    sign: Sign,
+    'hot-list': HotList,
+    ads: Ads,
+    links: Links,
+    list: List,
+    top: Top
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 </style>

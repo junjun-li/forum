@@ -5,7 +5,8 @@
       <a href="#signin"
          class="layui-hide-sm layui-show-xs-block fly-right"
          id="LAY_goSignin"
-         style="color: #FF5722;">去签到</a>
+         style="color: #FF5722;">去签到
+      </a>
     </div>
     <list-item></list-item>
   </div>
@@ -13,6 +14,7 @@
 
 <script>
 import ListItem from './ListItem'
+
 export default {
   name: 'top',
   components: {
@@ -21,5 +23,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 </style>

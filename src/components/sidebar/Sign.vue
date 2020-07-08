@@ -3,9 +3,14 @@
     <div class="fly-panel-title">
       签到
       <i class="fly-mid"></i>
-      <a href="javascript:;" class="fly-link" id="LAY_signinHelp">说明</a>
+      <a href="javascript:;"
+         class="fly-link"
+         id="LAY_signinHelp">说明
+      </a>
       <i class="fly-mid"></i>
-      <a href="javascript:;" class="fly-link" id="LAY_signinTop">
+      <a href="javascript:;"
+         class="fly-link"
+         id="LAY_signinTop">
         活跃榜
         <span class="layui-badge-dot"></span>
       </a>
@@ -15,7 +20,9 @@
       </span>
     </div>
     <div class="fly-panel-main fly-signin-main">
-      <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
+      <button class="layui-btn layui-btn-danger"
+              id="LAY_signin">今日签到
+      </button>
       <span>
         可获得
         <cite>5</cite>飞吻
@@ -36,5 +43,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 </style>

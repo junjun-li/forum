@@ -24,14 +24,15 @@
                                        rules="required|email">
                     <div class="layui-form-item">
                       <label for="L_email"
-                             class="layui-form-label">邮箱</label>
+                             class="layui-form-label">邮箱
+                      </label>
                       <div class="layui-input-inline">
                         <input type="text"
                                name="username"
                                v-model="username"
                                placeholder="请输入邮箱"
                                autocomplete="off"
-                               class="layui-input" />
+                               class="layui-input"/>
                       </div>
                     </div>
                     <div class="error-box">
@@ -43,14 +44,15 @@
                                        rules="required|min:6">
                     <div class="layui-form-item">
                       <label for="L_pass"
-                             class="layui-form-label">密码</label>
+                             class="layui-form-label">密码
+                      </label>
                       <div class="layui-input-inline">
                         <input type="password"
                                name="password"
                                v-model="password"
                                placeholder="请输入密码"
                                autocomplete="off"
-                               class="layui-input" />
+                               class="layui-input"/>
                       </div>
                     </div>
                     <div class="error-box">
@@ -63,14 +65,15 @@
                     <div class="layui-form-item">
                       <div class="layui-row">
                         <label for="L_vercode"
-                               class="layui-form-label">验证码</label>
+                               class="layui-form-label">验证码
+                        </label>
                         <div class="layui-input-inline">
                           <input type="text"
                                  name="code"
                                  v-model="code"
                                  placeholder="请输入验证码"
                                  autocomplete="off"
-                                 class="layui-input" />
+                                 class="layui-input"/>
                         </div>
                         <div>
                           <span class="svg"
@@ -124,7 +127,7 @@ export default {
     ValidationProvider,
     ValidationObserver
   },
-  data() {
+  data () {
     return {
       username: '',
       password: '',
@@ -133,7 +136,7 @@ export default {
       sid: ''
     }
   },
-  mounted() {
+  mounted () {
     window.vue = this
     let sid = ''
     if (localStorage.getItem('sid')) {
@@ -147,7 +150,7 @@ export default {
     this._getCode()
   },
   methods: {
-    _getCode() {
+    _getCode () {
       let sid = this.sid
       getCode(sid).then(res => {
         // console.log(res)
@@ -156,7 +159,7 @@ export default {
         }
       })
     },
-    async submitLogin() {
+    async submitLogin () {
       const isValid = await this.$refs.observer.validate()
       if (!isValid) {
         // ABORT!!
@@ -175,7 +178,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 .svg {
   // position: relative;
   // top: -4px;

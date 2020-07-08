@@ -3,16 +3,20 @@
        style="margin-bottom: 0;">
     <div class="fly-panel-title fly-filter">
       <a :class="{'layui-this': status === '' && tag === ''}"
-         @click.prevent="search()">综合</a>
+         @click.prevent="search()">综合
+      </a>
       <span class="fly-mid"></span>
       <a :class="{'layui-this': status === '0'}"
-         @click.prevent="search('0')">未结</a>
+         @click.prevent="search('0')">未结
+      </a>
       <span class="fly-mid"></span>
       <a :class="{'layui-this': status === '1'}"
-         @click.prevent="search('1')">已结</a>
+         @click.prevent="search('1')">已结
+      </a>
       <span class="fly-mid"></span>
       <a :class="{'layui-this': status === '' && tag === '精华'}"
-         @click.prevent="search('2')">精华</a>
+         @click.prevent="search('2')">精华
+      </a>
       <span class="fly-filter-right layui-hide-xs">
         <a :class="{'layui-this': sort === 'created'}"
            @click.prevent="search('3')">按最新</a>
@@ -33,12 +37,13 @@
 <script>
 import ListItem from './ListItem'
 import { getPostList } from '@/api/index'
+
 export default {
   name: 'list',
   components: {
     ListItem
   },
-  data() {
+  data () {
     return {
       status: '',
       tag: '',
@@ -48,11 +53,15 @@ export default {
       postList: []
     }
   },
-  created() {
+  created () {
+    let catalog = this.$route.params.catalog
+    if (typeof catalog !== 'undefined' && catalog !== '') {
+      this.catalog = catalog
+    }
     this._getPostList()
   },
   methods: {
-    async _getPostList() {
+    async _getPostList () {
       let data = {
         page: this.page,
         limit: this.limit,
@@ -64,7 +73,7 @@ export default {
       console.log(res)
       this.postList = res.data
     },
-    search(val) {
+    search (val) {
       switch (val) {
         // 未结贴
         case '0':
@@ -96,14 +105,19 @@ export default {
           this.status = ''
           this.tag = ''
           this._getPostList()
-
       }
+    }
+  },
+  watch: {
+    '$route' (newval, oldval) {
+
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 a {
   cursor: pointer;
 }

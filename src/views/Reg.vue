@@ -23,13 +23,14 @@
                                        rules="required|email">
                     <div class="layui-form-item">
                       <label for="L_email"
-                             class="layui-form-label">邮箱</label>
+                             class="layui-form-label">邮箱
+                      </label>
                       <div class="layui-input-inline">
                         <input type="text"
                                name="username"
                                v-model="regForm.username"
                                class="layui-input"
-                               placeholder="将会成为您唯一的登入名" />
+                               placeholder="将会成为您唯一的登入名"/>
                       </div>
                     </div>
                     <div class="error-box">
@@ -41,14 +42,15 @@
                                        rules="required|min:4|max:10">
                     <div class="layui-form-item">
                       <label for="L_username"
-                             class="layui-form-label">昵称</label>
+                             class="layui-form-label">昵称
+                      </label>
                       <div class="layui-input-inline">
                         <input type="text"
                                id="L_username"
                                name="name"
                                v-model="regForm.name"
                                class="layui-input"
-                               placeholder="请输入昵称" />
+                               placeholder="请输入昵称"/>
                       </div>
                     </div>
                     <div class="error-box">
@@ -61,14 +63,15 @@
                     <!-- |confirmed:confirmation -->
                     <div class="layui-form-item">
                       <label for="L_pass"
-                             class="layui-form-label">密码</label>
+                             class="layui-form-label">密码
+                      </label>
                       <div class="layui-input-inline">
                         <input type="password"
                                id="L_pass"
                                name="password"
                                v-model="regForm.password"
                                class="layui-input"
-                               placeholder="请输入6位数以上密码" />
+                               placeholder="请输入6位数以上密码"/>
                       </div>
                     </div>
                     <div class="error-box">
@@ -79,14 +82,15 @@
                                        rules="required|confirmed:confirmation">
                     <div class="layui-form-item">
                       <label for="L_repass"
-                             class="layui-form-label">确认密码</label>
+                             class="layui-form-label">确认密码
+                      </label>
                       <div class="layui-input-inline">
                         <input type="password"
                                id="L_repass"
                                name="repassword"
                                v-model="regForm.repassword"
                                placeholder="再次输入密码"
-                               class="layui-input" />
+                               class="layui-input"/>
                       </div>
                     </div>
                     <div class="error-box">
@@ -97,14 +101,15 @@
                                        rules="required|length:4">
                     <div class="layui-form-item">
                       <label for="L_vercode"
-                             class="layui-form-label">验证码</label>
+                             class="layui-form-label">验证码
+                      </label>
                       <div class="layui-input-inline">
                         <input type="text"
                                id="L_vercode"
                                name="code"
                                v-model="regForm.code"
                                placeholder="请输入验证码"
-                               class="layui-input" />
+                               class="layui-input"/>
                       </div>
                       <div>
                         <span class="svg"
@@ -119,7 +124,8 @@
                   <div class="layui-form-item">
                     <button class="layui-btn"
                             type="button"
-                            @click="validate().then(submitReg)">立即注册</button>
+                            @click="validate().then(submitReg)">立即注册
+                    </button>
                   </div>
                   <div class="layui-form-item fly-form-app">
                     <span>或者直接使用社交账号快捷注册</span>
@@ -146,13 +152,14 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import { reg, getCode } from '@/api/index'
 import { mapState } from 'vuex'
+
 export default {
   name: 'reg',
   components: {
     ValidationProvider,
     ValidationObserver
   },
-  data() {
+  data () {
     return {
       regForm: {
         username: '11776174@qq.com',
@@ -168,12 +175,12 @@ export default {
   computed: {
     ...mapState(['sid'])
   },
-  created() {
+  created () {
     this.regForm.sid = this.sid
     this._getCode()
   },
   methods: {
-    async _getCode() {
+    async _getCode () {
       let sid = this.sid
       getCode(sid).then(res => {
         // console.log(res)
@@ -182,19 +189,25 @@ export default {
         }
       })
     },
-    async submitReg() {
+    async submitReg () {
       let isValid = await this.$refs.observer.validate()
       if (!isValid) {
         return
       }
       let res = await reg(this.regForm)
+      if (res.code === 1) {
+        this.$alert(res.msg)
+      } else {
+        this.$alert(res.msg)
+      }
       console.log(res)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 .layui-form-item {
   margin-bottom: 0px;
 }

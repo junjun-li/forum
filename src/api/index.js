@@ -1,5 +1,6 @@
 import axios from '@/utils/request'
 import qs from 'qs'
+
 /**
  * 获取验证码 随机生成的id
  * @param {*} sid
@@ -48,10 +49,10 @@ export const getPostList = data =>
   axios.get(`/getPostList?${qs.stringify(data)}`)
 
 // 获取温馨提醒
-export const getTips = () => axios.get(`/getTips`)
+export const getTips = () => axios.get('/getTips')
 
 // 获取友情链接
-export const getLinks = () => axios.get(`/getLinks`)
+export const getLinks = () => axios.get('/getLinks')
 
 // 获取本周热议
-export const getTopWeek = () => axios.get(`/getTopWeek`)
+export const getTopWeek = () => axios.get('/getTopWeek')

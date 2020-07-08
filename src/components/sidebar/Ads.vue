@@ -6,7 +6,8 @@
          target="_blank"
          class="fly-zanzhu"
          time-limit="2017.09.25-2099.01.01"
-         style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>
+         style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作
+      </a>
     </div>
   </div>
 </template>
@@ -17,5 +18,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+       scoped>
 </style>

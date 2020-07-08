@@ -4,8 +4,8 @@
         :key="index">
       <a href="user/home.html"
          class="fly-avatar">
-        <!-- <img :src="`http://localhost:3000${item.uid.pic}`" /> -->
-        <img :src="item.uid.pic" />
+         <img v-if="item.uid && item.uid.pic" :src="`http://localhost:3000/img/${item.uid.pic}`" />
+<!--        <img v-if="item.uid && item.uid.pic" :src="item.uid.pic"/>-->
       </a>
       <h2>
         <a class="layui-badge">动态</a>
@@ -13,10 +13,10 @@
       </h2>
       <div class="fly-list-info">
         <a href>
-          <cite>{{item.uid.name}}</cite>
+          <cite>{{item.uid && item.uid.name}}</cite>
           <i class="iconfont icon-renzheng"
              title="认证信息：XXX"></i>
-          <i class="layui-badge fly-badge-vip">VIP{{item.uid.isVip}}</i>
+          <i class="layui-badge fly-badge-vip">VIP{{item.uid && item.uid.isVip}}</i>
         </a>
         <span>{{parseTime(item.created)}}</span>
 
@@ -43,6 +43,7 @@
 </template>
 <script>
 import { parseTime } from '@/utils/index'
+
 export default {
   name: 'listitem',
   props: {
@@ -57,5 +58,6 @@ export default {
 }
 </script>
 
-<style lang='less' scoped>
+<style lang='less'
+       scoped>
 </style>

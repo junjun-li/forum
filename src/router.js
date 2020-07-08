@@ -1,20 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Login = () => import( /* webpackChunkName: 'login' */ '@/views/Login.vue')
-const Reg = () => import( /* webpackChunkName: 'reg' */ '@/views/Reg.vue')
-const Forget = () => import( /* webpackChunkName: 'forget' */ '@/views/Forget.vue')
-const Index = () => import( /* webpackChunkName: 'index' */ '@/views/channels/Index.vue')
-const Home = () => import( /* webpackChunkName: 'home' */ '@/views/channels/Home.vue')
-const Template1 = () => import( /* webpackChunkName: 'template1' */ '@/views/channels/Template1.vue')
+const Login = () => import(/* webpackChunkName: 'login' */ '@/views/Login.vue')
+const Reg = () => import(/* webpackChunkName: 'reg' */ '@/views/Reg.vue')
+// const Forget = () => import(/* webpackChunkName: 'forget' */ '@/views/Forget.vue')
+const Index = () => import(/* webpackChunkName: 'index' */ '@/views/channels/Index.vue')
+const Home = () => import(/* webpackChunkName: 'home' */ '@/views/channels/Home.vue')
+const catalog = () => import(/* webpackChunkName: 'catalog' */ '@/views/channels/catalog.vue')
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '/',
       component: Home,
-      children: [{
+      children: [
+        {
           path: 'index',
           name: 'index',
           component: Index
@@ -22,7 +24,7 @@ export default new Router({
         {
           path: '/index/:catalog',
           name: 'catalog',
-          component: Template1
+          component: catalog
         }
       ]
     },

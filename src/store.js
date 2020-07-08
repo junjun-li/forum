@@ -9,7 +9,7 @@ export default new Vuex.Store({
     isLogin: false
   },
   mutations: {
-    setSid(state, sid) {
+    setSid (state, sid) {
       state.sid = sid
     }
   },
