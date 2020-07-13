@@ -31,9 +31,8 @@ export default {
   },
   methods: {
     async _getTopWeek () {
-      let res = await getTopWeek()
+      const res = await getTopWeek()
       this.topWeekList = res.data
-      console.log(res)
     }
   }
 

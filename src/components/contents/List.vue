@@ -54,7 +54,7 @@ export default {
     }
   },
   created () {
-    let catalog = this.$route.params.catalog
+    const catalog = this.$route.params.catalog
     if (typeof catalog !== 'undefined' && catalog !== '') {
       this.catalog = catalog
     }
@@ -62,15 +62,14 @@ export default {
   },
   methods: {
     async _getPostList () {
-      let data = {
+      const data = {
         page: this.page,
         limit: this.limit,
         catalog: this.catalog,
         sort: this.sort,
         status: this.status
       }
-      let res = await getPostList(data)
-      console.log(res)
+      const res = await getPostList(data)
       this.postList = res.data
     },
     search (val) {

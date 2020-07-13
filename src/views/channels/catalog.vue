@@ -28,13 +28,13 @@ export default {
     list: List
   },
   created () {
-    console.log(this.$route)
-    console.log(this.$router)
+    // console.log(this.$route)
+    // console.log(this.$router)
   },
   watch: {
     '$route' (newValue, oldValue) {
-      console.log(newValue)
-      console.log(oldValue)
+      // console.log(newValue)
+      // console.log(oldValue)
     }
   }
 }

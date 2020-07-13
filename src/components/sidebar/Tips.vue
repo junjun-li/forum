@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     async _getTips () {
-      let res = await getTips()
+      const res = await getTips()
       this.tipsList = res.data
     }
   }

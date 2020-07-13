@@ -16,13 +16,13 @@ export const getCode = sid =>
  * 注册接口
  * @param {*} data
  */
-export const reg = data => axios.post('/reg', data)
+export const reg = data => axios.post('/public/reg', data)
 
 /**
  * 登录接口
  * @param {*} data
  */
-export const login = data => axios.post('/login', data)
+export const login = data => axios.post('/public/login', data)
 
 /**
  * 获取文章列表
@@ -46,13 +46,13 @@ export const login = data => axios.post('/login', data)
 //     }
 //   })
 export const getPostList = data =>
-  axios.get(`/getPostList?${qs.stringify(data)}`)
+  axios.get(`/public/getPostList?${qs.stringify(data)}`)
 
 // 获取温馨提醒
-export const getTips = () => axios.get('/getTips')
+export const getTips = () => axios.get('/public/getTips')
 
 // 获取友情链接
-export const getLinks = () => axios.get('/getLinks')
+export const getLinks = () => axios.get('/public/getLinks')
 
 // 获取本周热议
-export const getTopWeek = () => axios.get('/getTopWeek')
+export const getTopWeek = () => axios.get('/public/getTopWeek')

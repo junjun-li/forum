@@ -35,8 +35,7 @@ export default {
   },
   methods: {
     async _getLinks () {
-      let res = await getLinks()
-      console.log(res)
+      const res = await getLinks()
       this.linkList = res.data
     }
   }

@@ -181,7 +181,7 @@ export default {
   },
   methods: {
     async _getCode () {
-      let sid = this.sid
+      const sid = this.sid
       getCode(sid).then(res => {
         // console.log(res)
         if (res.code === 0) {
@@ -190,11 +190,11 @@ export default {
       })
     },
     async submitReg () {
-      let isValid = await this.$refs.observer.validate()
+      const isValid = await this.$refs.observer.validate()
       if (!isValid) {
         return
       }
-      let res = await reg(this.regForm)
+      const res = await reg(this.regForm)
       if (res.code === 1) {
         this.$alert(res.msg)
       } else {

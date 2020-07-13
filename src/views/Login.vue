@@ -5,9 +5,11 @@
       <div class="layui-tab layui-tab-brief"
            lay-filter="user">
         <ul class="layui-tab-title">
-          <li class="layui-this">登入</li>
+          <li class="layui-this">
+            <router-link to="/login">登录</router-link>
+          </li>
           <li>
-            <router-link :to="{name: 'reg'}">注册</router-link>
+            <router-link to="/reg">注册</router-link>
           </li>
         </ul>
         <div class="layui-form layui-tab-content"
@@ -129,8 +131,8 @@ export default {
   },
   data () {
     return {
-      username: '',
-      password: '',
+      username: '11776174@qq.com',
+      password: '123456',
       code: '',
       svg: '',
       sid: ''
@@ -151,7 +153,7 @@ export default {
   },
   methods: {
     _getCode () {
-      let sid = this.sid
+      const sid = this.sid
       getCode(sid).then(res => {
         // console.log(res)
         if (res.code === 0) {
@@ -167,11 +169,18 @@ export default {
       }
       login({
         username: this.username,
-        password: this.username,
+        password: this.password,
         code: this.code,
         sid: this.sid
       }).then(res => {
-        console.log(res)
+        if (res.code === 1) {
+          this.$alert(res.msg)
+        } else {
+          this.$store.commit('setUserInfo', res.data)
+          this.$store.commit('setToken', res.data.token)
+          this.$store.commit('setIsLogin', true)
+          this.$router.push('index')
+        }
       })
     }
   }

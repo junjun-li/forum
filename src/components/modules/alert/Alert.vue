@@ -117,7 +117,7 @@ $btn-dark: darken($btn-main, 5%);
   text-align: center;
   line-height: 32px;
   border-radius: 6px;
-
+  cursor: pointer;
   &.success {
     background: $btn-main;
     color: #fff;

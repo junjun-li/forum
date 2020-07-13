@@ -7,6 +7,7 @@ class HttpRequest {
     this.baseURL = baseURL
     this.pending = {}
   }
+
   // 设置axios的基本配置
   getInsideConfig () {
     const config = {
@@ -18,6 +19,7 @@ class HttpRequest {
     }
     return config
   }
+
   // 如果重复请求,删除掉重复的请求
   removePending (key, isRequest = false) {
     if (this.pending[key] && isRequest) {
@@ -25,6 +27,7 @@ class HttpRequest {
     }
     delete this.pending[key]
   }
+
   // 给实例添加拦截器
   interceptors (instance) {
     // // 添加请求拦截器
@@ -73,6 +76,7 @@ class HttpRequest {
     this.interceptors(instance)
     return instance(newOptions)
   }
+
   get (url, config) {
     let options = Object.assign(
       {
@@ -83,6 +87,7 @@ class HttpRequest {
     )
     return this.request(options)
   }
+
   post (url, data) {
     return this.request({
       method: 'post',

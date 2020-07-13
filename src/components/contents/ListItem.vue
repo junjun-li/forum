@@ -4,8 +4,9 @@
         :key="index">
       <a href="user/home.html"
          class="fly-avatar">
-         <img v-if="item.uid && item.uid.pic" :src="`http://localhost:3000/img/${item.uid.pic}`" />
-<!--        <img v-if="item.uid && item.uid.pic" :src="item.uid.pic"/>-->
+        <img v-if="item.uid && item.uid.pic"
+             :src="`/img/${item.uid.pic}`"/>
+        <!--<img v-if="item.uid && item.uid.pic" :src="item.uid.pic"/>-->
       </a>
       <h2>
         <a class="layui-badge">动态</a>
