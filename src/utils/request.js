@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { baseURL } from '@/config/index'
 
-let CancelToken = axios.CancelToken
+const CancelToken = axios.CancelToken
 class HttpRequest {
   constructor (baseURL) {
     this.baseURL = baseURL
@@ -34,13 +34,15 @@ class HttpRequest {
     instance.interceptors.request.use(
       config => {
         // 在发送请求之前做些什么
-        let key = config.url + '&' + config.method
+        const key = config.url + '&' + config.method
+        const token = localStorage.getItem('token')
         // 先判断 this.pending[key] 里面有没有这个请求
         this.removePending(key, true)
         // 往 this.pending里面添加这个取消请求的方法
         config.cancelToken = new CancelToken(c => {
           this.pending[key] = c
         })
+        config.headers.Authorization = 'Bearer ' + token
         return config
       },
       err => {
@@ -52,7 +54,7 @@ class HttpRequest {
     instance.interceptors.response.use(
       res => {
         // 对响应数据做点什么
-        let key = res.config.url + '&' + res.config.method
+        const key = res.config.url + '&' + res.config.method
         this.removePending(key)
         if (res.status === 200) {
           return Promise.resolve(res.data)
@@ -69,16 +71,16 @@ class HttpRequest {
 
   // 创建axios实例
   request (options) {
-    let instance = axios.create()
+    const instance = axios.create()
     // 混合options
-    let newOptions = Object.assign(this.getInsideConfig(), options)
+    const newOptions = Object.assign(this.getInsideConfig(), options)
     // 编辑拦截器
     this.interceptors(instance)
     return instance(newOptions)
   }
 
   get (url, config) {
-    let options = Object.assign(
+    const options = Object.assign(
       {
         method: 'get',
         url
@@ -97,6 +99,6 @@ class HttpRequest {
   }
 }
 
-let URL = process.env.NODE_ENV === 'development' ? baseURL.dev : baseURL.pro
+const URL = process.env.NODE_ENV === 'development' ? baseURL.dev : baseURL.pro
 
 export default new HttpRequest(URL)

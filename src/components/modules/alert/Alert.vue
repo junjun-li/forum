@@ -4,7 +4,7 @@
       <div class="flex">{{msg}}</div>
       <div v-if="type === 'alert'">
         <div class="btnCommon success"
-             @click="close()">确定
+             @click="successAlert()">确定
         </div>
       </div>
       <div v-else
@@ -53,6 +53,10 @@ export default {
   methods: {
     close () {
       this.isShow = false
+    },
+    successAlert () {
+      this.close()
+      this.success()
     },
     closeMask () {
       if (this.type === 'alert') {

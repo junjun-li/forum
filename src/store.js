@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import createLogger from 'vuex/dist/logger'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  // 生产环境 禁用严格模式 严格模式有性消耗
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     sid: '',
     isLogin: false,
@@ -31,5 +33,6 @@ export default new Vuex.Store({
       state.isLogin = value
     }
   },
-  actions: {}
+  actions: {},
+  plugins: process.env.NODE_ENV !== 'production' ? [createLogger()] : []
 })

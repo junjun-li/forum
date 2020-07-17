@@ -18,23 +18,26 @@
       </a>
       <span class="fly-signin-days">
         已连续签到
-        <cite>16</cite>天
+        <cite>{{count}}</cite>天
       </span>
     </div>
     <div class="fly-panel-main fly-signin-main">
-      <button class="layui-btn layui-btn-danger"
-              id="LAY_signin">今日签到
-      </button>
-      <span>
+      <template v-if="!isSign">
+        <button class="layui-btn layui-btn-danger"
+                id="LAY_signin"
+                @click="_fav()">今日签到
+        </button>
+        <span>
         可获得
-        <cite>5</cite>飞吻
+        <cite>{{favs}}</cite>飞吻
       </span>
+      </template>
 
       <!-- 已签到状态 -->
-      <!--
-          <button class="layui-btn layui-btn-disabled">今日已签到</button>
-          <span>获得了<cite>20</cite>飞吻</span>
-      -->
+      <template v-else>
+        <button class="layui-btn layui-btn-disabled">{{msg}}</button>
+        <span>获得了<cite>{{favs}}</cite>飞吻</span>
+      </template>
     </div>
     <sign-info :isShow="isShow"
                @closeModal="close()"></sign-info>
@@ -46,7 +49,9 @@
 <script>
 import SignInfo from './SignInfo'
 import SignList from './SignList'
-
+import { fav } from '@/api'
+import { mapState } from 'vuex'
+import moment from 'dayjs'
 export default {
   name: 'sign',
   components: {
@@ -57,10 +62,126 @@ export default {
     return {
       isShow: false,
       showList: false,
-      current: 0
+      current: 0,
+      isSign: false, // 是否签到
+      timeId: '',
+      msg: ''
+    }
+  },
+  mounted () {
+    let isSign = this.userInfo.isSign
+    let lastSign = this.userInfo.lastSign
+    let nowDate = moment().format('YYYY-MM-DD')
+    let lastDate = moment(lastSign).format('YYYY-MM-DD')
+    let diff = moment(nowDate).diff(moment(lastDate))
+    // 如果过了12点 签到的状态要重新赋值 变成未签到
+    if (diff > 0 && isSign) {
+      this.isSign = false
+    } else {
+      this.isSign = isSign
+      // 如果今天签到了 计算距离下一次签到的时差
+      if (diff === 0 && isSign) {
+        this.nextSign()
+      } else {
+        this.msg = '今日已签到'
+      }
+    }
+  },
+  computed: {
+    ...mapState(['isLogin', 'userInfo']),
+    count: {
+      get: function () {
+        if (this.userInfo && this.userInfo.count) {
+          return this.userInfo.count
+        } else {
+          return 0
+        }
+      },
+      set: function (v) {
+        console.log(v)
+      }
+    },
+    favs: {
+      get: function () {
+        const count = parseInt(this.count)
+        let result = 0
+        if (count < 5) {
+          result = 5
+        } else if (count >= 5 && count < 15) {
+          result = 10
+        } else if (count >= 15 && count < 30) {
+          result = 15
+        } else if (count >= 30 && count < 100) {
+          result = 20
+        } else if (count >= 100 && count < 365) {
+          result = 30
+        } else if (count >= 365) {
+          result = 50
+        }
+        return result
+      },
+      set: function (v) {
+        console.log(v)
+      }
     }
   },
   methods: {
+    nextSign () {
+      // 获取今天 +1 天的时间
+      let newDate = moment().add(1, 'day').format('YYYY-MM-DD')
+      // 获取现在的时间距离 今天 +1 的秒数
+      let seconds = moment(newDate + ' 00:00:00').diff(moment(), 'second')
+
+      let hour = Math.floor(seconds / 3600)
+      let min = Math.floor(seconds % 3600 / 60)
+      let second = seconds % 60
+      this.msg = `签到倒计时 ${hour}:${min < 10 ? '0' + min : min}:${second < 10 ? '0' + second : second}`
+
+      this.timeId = setInterval(() => {
+        seconds = moment(newDate + ' 00:00:00').diff(moment(), 'second')
+        // 测试用
+        // seconds = moment(newDate).diff(moment(), 'second')
+        hour = Math.floor(seconds / 3600)
+        min = Math.floor(seconds % 3600 / 60)
+        second = seconds % 60
+        this.msg = `签到倒计时 ${hour}:${min < 10 ? '0' + min : min}:${second < 10 ? '0' + second : second}`
+        if (seconds <= 0) {
+          clearInterval(this.timeId)
+          this.isSign = false
+          let user = {
+            ...this.$store.state.userInfo
+          }
+          user.isSign = false
+          this.$store.commit('setUserInfo', user)
+        }
+      }, 1000)
+    },
+    async _fav () {
+      if (!this.isLogin) {
+        this.$pop('shake', '请先登录')
+        await this.$router.push({
+          path: '/login'
+        })
+        return
+      }
+      let res = await fav()
+      let user = {
+        ...this.userInfo
+      }
+      if (res.code === 0) {
+        this.$pop('', '签到成功！')
+        user.favs = res.data.favs
+        user.count = res.data.count
+      } else {
+        // 用户已经签到
+        this.$pop('', '您今日已经签到！')
+      }
+      user.isSign = true
+      user.lastSign = res.lastSign
+      // 页面的签到按钮
+      this.isSign = true
+      this.$store.commit('setUserInfo', user)
+    },
     showInfo () {
       this.isShow = true
     },
@@ -73,6 +194,15 @@ export default {
     },
     choose (val) {
       this.current = val
+    }
+  },
+  watch: {
+    userInfo: {
+      handler: function (newVal, oldVal) {
+        this.favs = newVal.favs
+        this.count = newVal.count
+      },
+      deep: true
     }
   }
 }

@@ -56,3 +56,6 @@ export const getLinks = () => axios.get('/public/getLinks')
 
 // 获取本周热议
 export const getTopWeek = () => axios.get('/public/getTopWeek')
+
+// 签到
+export const fav = () => axios.get('/user/fav')

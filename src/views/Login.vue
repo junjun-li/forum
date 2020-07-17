@@ -154,17 +154,18 @@ export default {
   methods: {
     _getCode () {
       const sid = this.sid
+      this.code = ''
       getCode(sid).then(res => {
         // console.log(res)
         if (res.code === 0) {
-          this.svg = res.data
+          this.svg = res.data.data
+          this.code = res.data.text
         }
       })
     },
     async submitLogin () {
       const isValid = await this.$refs.observer.validate()
       if (!isValid) {
-        // ABORT!!
         return
       }
       login({
@@ -174,7 +175,7 @@ export default {
         sid: this.sid
       }).then(res => {
         if (res.code === 1) {
-          this.$alert(res.msg)
+          this.$alert(res.msg, this._getCode)
         } else {
           this.$store.commit('setUserInfo', res.data)
           this.$store.commit('setToken', res.data.token)
