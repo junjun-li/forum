@@ -177,6 +177,8 @@ export default {
         if (res.code === 1) {
           this.$alert(res.msg, this._getCode)
         } else {
+          // 存储用户的登录名
+          res.data.username = this.username
           this.$store.commit('setUserInfo', res.data)
           this.$store.commit('setToken', res.data.token)
           this.$store.commit('setIsLogin', true)

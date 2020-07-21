@@ -6,7 +6,7 @@ import qs from 'qs'
  * @param {*} sid
  */
 export const getCode = sid =>
-  axios.get('/getCaptcha', {
+  axios.get('/public/getCaptcha', {
     params: {
       sid
     }
@@ -59,3 +59,21 @@ export const getTopWeek = () => axios.get('/public/getTopWeek')
 
 // 签到
 export const fav = () => axios.get('/user/fav')
+
+// 更新用户基本资料
+export const updateUserInfo = (data) => axios.post('/user/basic', data)
+
+// 发送更新用户名邮件
+export const sendUpdateEmail = (updateUserName) => axios.get('/user/sendUpdateEmail', {
+  params: {
+    updateUserName
+  }
+})
+
+// 确认更新用户名
+export const updateUsername = (data) => axios.get('/user/updateUsername', {
+  params: {
+    key: data.key,
+    username: data.username
+  }
+})

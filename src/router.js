@@ -4,6 +4,11 @@ import store from '@/store'
 import jwt from 'jsonwebtoken'
 import moment from 'dayjs'
 
+// const originalPush = Router.prototype.push
+// Router.prototype.push = function push (location) {
+//   return originalPush.call(this, location).catch(err => err)
+// }
+
 const Login = () => import(/* webpackChunkName: 'login' */ '@/views/Login.vue')
 const Reg = () => import(/* webpackChunkName: 'reg' */ '@/views/Reg.vue')
 // const Forget = () => import(/* webpackChunkName: 'forget' */ '@/views/Forget.vue')
@@ -23,6 +28,9 @@ const Passwd = () => import(/* webpackChunkName: 'password' */ '@/components/use
 const Accounts = () => import(/* webpackChunkName: 'accounts' */ '@/components/user/common/Accounts.vue')
 const MyPost = () => import(/* webpackChunkName: 'mypost' */ '@/components/user/common/MyPost.vue')
 const MyCollection = () => import(/* webpackChunkName: 'mycollection' */ '@/components/user/common/MyCollection.vue')
+const MyEmail = () => import(/* webpackChunkName: 'mycollection' */ '@/components/user/common/MyEmail.vue')
+const NoFound = () => import(/* webpackChunkName: 'notfound' */ '@/views/NotFound.vue')
+const Confirm = () => import(/* webpackChunkName: 'confirm' */ '@/views/Confirm.vue')
 Vue.use(Router)
 
 const router = new Router({
@@ -110,6 +118,11 @@ const router = new Router({
               path: 'account',
               name: 'account',
               component: Accounts
+            },
+            {
+              path: 'email',
+              name: 'email',
+              component: MyEmail
             }
           ]
         },
@@ -141,6 +154,18 @@ const router = new Router({
         }
       ]
       // beforeEnter:
+    },
+    {
+      path: '/confirm',
+      component: Confirm
+    },
+    {
+      path: '/404',
+      component: NoFound
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
   ]
 })

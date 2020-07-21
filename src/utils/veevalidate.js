@@ -43,11 +43,16 @@ localize({
       password: '密码',
       repassword: '密码',
       code: '验证码',
-      name: '昵称'
+      name: '昵称',
+      location: '城市',
+      gender: '性别'
     },
     fields: {
       email: {
         email: '邮箱不符合规范'
+      },
+      gender: {
+        required: '请选择性别'
       },
       repassword: {
         required: '请再次输入密码',

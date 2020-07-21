@@ -3,7 +3,7 @@
     <div class="layui-container">
       <a class="fly-logo"
          href="/">
-        <img src="@/assets/logo-2.png"
+        <img src="@/assets/img/logo-2.png"
              alt="layui"/>
       </a>
       <ul class="layui-nav fly-nav layui-hide-xs">
@@ -74,10 +74,10 @@
             <dl class="layui-nav-child layui-anim layui-anim-upbit"
                 :class="{'layui-show': isHover}">
               <dd>
-                <a href="user/set.html">
+                <router-link to="/center/set">
                   <i class="layui-icon">&#xe620;</i>
                   基本设置
-                </a>
+                </router-link>
               </dd>
               <dd>
                 <a href="user/message.html">
@@ -127,7 +127,8 @@ export default {
         this.$store.commit('setToken', '')
         this.$store.commit('setUserInfo', '')
         this.$store.commit('setIsLogin', false)
-        this.$router.push('/')
+        // 解决重复push同一个导航路由的报错
+        this.$router.push('/index', () => {})
       }, () => {})
     },
     show () {

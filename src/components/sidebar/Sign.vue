@@ -16,7 +16,7 @@
         活跃榜
         <span class="layui-badge-dot"></span>
       </a>
-      <span class="fly-signin-days">
+      <span class="fly-signin-days" v-show="isSign || isLogin">
         已连续签到
         <cite>{{count}}</cite>天
       </span>
@@ -98,7 +98,6 @@ export default {
         }
       },
       set: function (v) {
-        console.log(v)
       }
     },
     favs: {
@@ -121,7 +120,6 @@ export default {
         return result
       },
       set: function (v) {
-        console.log(v)
       }
     }
   },

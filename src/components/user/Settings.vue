@@ -9,7 +9,9 @@
           <router-link :to="{name: 'pic'}" exact-active-class="layui-this">头像</router-link>
         </li>
         <li>
-          <router-link :to="{name: 'passwd'}" exact-active-class="layui-this">密码</router-link>
+          <router-link :to="{name: 'email'}" exact-active-class="layui-this">修改邮箱</router-link>
+        </li><li>
+          <router-link :to="{name: 'passwd'}" exact-active-class="layui-this">修改密码</router-link>
         </li>
         <li>
           <router-link :to="{name: 'account'}" exact-active-class="layui-this">帐号绑定</router-link>

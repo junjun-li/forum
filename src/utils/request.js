@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { baseURL } from '@/config/index'
-
+import router from '@/router'
 const CancelToken = axios.CancelToken
 class HttpRequest {
   constructor (baseURL) {
@@ -56,6 +56,7 @@ class HttpRequest {
         // 对响应数据做点什么
         const key = res.config.url + '&' + res.config.method
         this.removePending(key)
+        console.log(res)
         if (res.status === 200) {
           return Promise.resolve(res.data)
         } else {
@@ -64,6 +65,8 @@ class HttpRequest {
       },
       err => {
         // 对响应错误做点什么
+        console.log(err)
+        router.push('/login')
         return Promise.reject(err)
       }
     )
